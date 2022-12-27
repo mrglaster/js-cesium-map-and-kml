@@ -1,5 +1,7 @@
 //Initialize API TOKEN
-Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYWE1OWUxNy1mMWZiLTQzYjYtYTQ0OS1kMWFjYmFkNjc5YzciLCJpZCI6NTc3MzMsImlhdCI6MTYyNzg0NTE4Mn0.XcKpgANiY19MC4bdFUXMVEBToBmqS8kuYpUlxJHYZxk";
+
+const TOKEN = "USE YOUR OWN!"
+Cesium.Ion.defaultAccessToken = TOKEN;
 
 //Image for SweetAlert PopUp
 const INPUT_IMAGE_URL = "./images/telescope.png";
@@ -74,9 +76,10 @@ function processCesiumMap(originsArray){
     imageHeight: 200,
     allowOutsideClick: false,
     inputValidator: (value) => {
-      if (!value) return "You need to write origins!";
+      if (!value) return "You need to write coordinates!";
       let checkedResult = checkInputParams(value);
       if (checkedResult) return checkedResult;
+      if (TOKEN == "USE YOUR OWN!") return "We can't process your request: CesiumJS Token not found!";
     },
   });
   if (originsLine) return originsLine;
