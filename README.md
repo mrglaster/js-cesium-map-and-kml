@@ -22,6 +22,12 @@ The utility solves following tasks
 
 ![alt text](https://github.com/mrglaster/js-cesium-map-and-kml/blob/main/readmeImages/5.png?raw=True)
 
+### Used Libraries, Modules etc
+1) ![Cesium JS](https://cesium.com/platform/cesiumjs/)
+2) ![SweetAlert2](https://sweetalert2.github.io/)
+3) ![SweetAlert2 Dark theme](https://github.com/sweetalert2/sweetalert2-themes/tree/main/dark)
+
+
 ### Developed by GromedevTeam, 2022
 1) [Vadim Nechaev](https://github.com/nech14)
 2) [Vladislav Novikov](https://github.com/vladnov138)
