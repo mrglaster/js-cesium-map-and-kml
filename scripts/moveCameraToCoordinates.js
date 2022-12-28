@@ -1,7 +1,5 @@
 //Initialize API TOKEN
-
-const TOKEN = "USE YOUR OWN!"
-Cesium.Ion.defaultAccessToken = TOKEN;
+Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYWE1OWUxNy1mMWZiLTQzYjYtYTQ0OS1kMWFjYmFkNjc5YzciLCJpZCI6NTc3MzMsImlhdCI6MTYyNzg0NTE4Mn0.XcKpgANiY19MC4bdFUXMVEBToBmqS8kuYpUlxJHYZxk";
 
 //Image for SweetAlert PopUp
 const INPUT_IMAGE_URL = "./images/telescope.png";
@@ -56,7 +54,6 @@ function processCesiumMap(originsArray){
     const viewer = new Cesium.Viewer(CESIUM_CONTAINER_DIVNAME, {
         terrainProvider: Cesium.createWorldTerrain()
     });    
-    const buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings());
     viewer.camera.flyTo({
        destination : Cesium.Cartesian3.fromDegrees(longitude, latitude, height),
     });
@@ -76,10 +73,9 @@ function processCesiumMap(originsArray){
     imageHeight: 200,
     allowOutsideClick: false,
     inputValidator: (value) => {
-      if (!value) return "You need to write coordinates!";
+      if (!value) return "You need to write origins!";
       let checkedResult = checkInputParams(value);
       if (checkedResult) return checkedResult;
-      if (TOKEN == "USE YOUR OWN!") return "We can't process your request: CesiumJS Token not found!";
     },
   });
   if (originsLine) return originsLine;
