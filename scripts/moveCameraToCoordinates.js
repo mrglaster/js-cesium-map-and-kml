@@ -1,5 +1,5 @@
 //Initialize API TOKEN
-Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYWE1OWUxNy1mMWZiLTQzYjYtYTQ0OS1kMWFjYmFkNjc5YzciLCJpZCI6NTc3MzMsImlhdCI6MTYyNzg0NTE4Mn0.XcKpgANiY19MC4bdFUXMVEBToBmqS8kuYpUlxJHYZxk";
+Cesium.Ion.defaultAccessToken = "USE YOUR OWN";
 
 //Image for SweetAlert PopUp
 const INPUT_IMAGE_URL = "./images/telescope.png";
