@@ -1,0 +1,223 @@
+body {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+
+.formBody {
+    display: flex;
+    height: 300px;
+    width: 600px;
+    border: 5px solid black;
+    padding: 10px;
+}
+
+.nameFunction{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16pt;
+}
+
+.figureColor{
+    display: flex;
+    margin-top: 10px;
+}
+
+.fullColor {
+    display: flex;
+    margin-top: 10px;
+}
+
+.typeTransparency{
+    display: flex;
+}
+
+.transparency{
+    margin: 14px;
+    width: 36px;
+    height: 16px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.figureColor > label {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+label[for="#202020"] {
+    background-color: #202020;
+}
+
+input[name="Fcolor"]:checked + label[for="#202020"] {
+    background-color: #fff;
+    outline: 7px solid #202020;
+    outline-offset: -7px;
+}
+
+label[for="#3F88E8"] {
+    background-color: #3F88E8;
+}
+
+input[name="Fcolor"]:checked + label[for="#3F88E8"] {
+    background-color: #fff;
+    outline: 7px solid #3F88E8;
+    outline-offset: -7px;
+}
+
+label[for="#E83F56"] {
+    background-color: #E83F56;
+}
+
+input[name="Fcolor"]:checked + label[for="#E83F56"] {
+    background-color: #fff;
+    outline: 7px solid #E83F56;
+    outline-offset: -7px;
+}
+
+label[for="#097A14"] {
+    background-color: #097A14;
+}
+
+input[name="Fcolor"]:checked + label[for="#097A14"] {
+    background-color: #fff;
+    outline: 7px solid #097A14;
+    outline-offset: -7px;
+}
+
+label[for="#DCA40A"] {
+    background-color: #DCA40A;
+}
+
+input[name="Fcolor"]:checked + label[for="#DCA40A"] {
+    background-color: #fff;
+    outline: 7px solid #DCA40A;
+    outline-offset: -7px;
+}
+
+label[for="#DC0AD5"] {
+    display: table-cell;
+    background-color: #fff;
+    border: 1px solid;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+input[name="Fcolor"]:checked + label[for="#DC0AD5"] {
+    outline: 0;
+    border: 0;
+    margin-bottom: 2px;
+    display: normal;
+}
+
+input[name="Fcolor"]:not(:checked) + label[for="#DC0AD5"] > .findColor{
+    display: none;
+}
+
+
+input[name="Fcolor"]:checked + label[for="#DC0AD5"] > .findColor{
+    display: normal;
+}
+
+
+
+
+
+.fullColor > label {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+
+label[for="1FFcolor"] {
+    background-color: #202020;
+}
+
+
+input[name="FFcolor"]:checked + label[for="1FFcolor"] {
+    background-color: #fff;
+    outline: 7px solid #202020;
+    outline-offset: -7px;
+}
+
+label[for="2FFcolor"] {
+    background-color: #3F88E8;
+}
+
+input[name="FFcolor"]:checked + label[for="2FFcolor"] {
+    background-color: #fff;
+    outline: 7px solid #3F88E8;
+    outline-offset: -7px;
+}
+
+label[for="3FFcolor"] {
+    background-color: #E83F56;
+}
+
+input[name="FFcolor"]:checked + label[for="3FFcolor"] {
+    background-color: #fff;
+    outline: 7px solid #E83F56;
+    outline-offset: -7px;
+}
+
+label[for="4FFcolor"] {
+    background-color: #097A14;
+}
+
+input[name="FFcolor"]:checked + label[for="4FFcolor"] {
+    background-color: #fff;
+    outline: 7px solid #097A14;
+    outline-offset: -7px;
+}
+
+label[for="5FFcolor"] {
+    background-color: #DCA40A;
+}
+
+input[name="FFcolor"]:checked + label[for="5FFcolor"] {
+    background-color: #fff;
+    outline: 7px solid #DCA40A;
+    outline-offset: -7px;
+}
+
+
+
+label[for="6FFcolor"] {
+    display: table-cell;
+    background-color: #fff;
+    border: 1px solid;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+input[name="FFcolor"]:checked + label[for="6FFcolor"] {
+    outline: 0;
+    border: 0;
+    margin-bottom: 2px;
+    display: normal;
+}
+
+input[name="FFcolor"]:not(:checked) + label[for="6FFcolor"] > .findColor {
+    display: none;
+}
+
+
+input[name="FFcolor"]:checked + label[for="6FFcolor"] > .findColor {
+    display: normal;
+}
+
