@@ -67,7 +67,7 @@ function processCesiumMap(originsArray){
     inputAttributes: {
       autocapitalize: "off",
     },
-    text: "Three values separated by space required: longitude, latitude and height",
+    text: "Three values separated by space required: longitude, latitude and alttitude",
     imageUrl: INPUT_IMAGE_URL,
     imageWidth: 200,
     imageHeight: 200,
