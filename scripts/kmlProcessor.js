@@ -1,6 +1,5 @@
 //Token set up
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYWE1OWUxNy1mMWZiLTQzYjYtYTQ0OS1kMWFjYmFkNjc5YzciLCJpZCI6NTc3MzMsImlhdCI6MTYyNzg0NTE4Mn0.XcKpgANiY19MC4bdFUXMVEBToBmqS8kuYpUlxJHYZxk";
+const TOKEN = "USE YOUR OWN"
 Cesium.Ion.defaultAccessToken = TOKEN;
 
 //Image for SweetAlert PopUp
