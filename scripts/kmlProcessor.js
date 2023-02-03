@@ -1,5 +1,5 @@
 //Token set up
-const TOKEN = "USE YOUR OWN"
+const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYWE1OWUxNy1mMWZiLTQzYjYtYTQ0OS1kMWFjYmFkNjc5YzciLCJpZCI6NTc3MzMsImlhdCI6MTYyNzg0NTE4Mn0.XcKpgANiY19MC4bdFUXMVEBToBmqS8kuYpUlxJHYZxk"
 Cesium.Ion.defaultAccessToken = TOKEN;
 
 //Image for SweetAlert PopUp
@@ -46,19 +46,19 @@ function chunkify(a, n, balanced) {
 /**Add area based on array of points*/
 function addMapArea(viewer, areaData) {
   let splitedData = chunkify(areaData, POLYGON_POINTS_LIMIT, true)
-  var resultArea; 
+  var resultArea;
   let currentColor = Cesium.Color.fromRandom();
-  for (let i = 0; i < splitedData.length; i++){
+  for (let i = 0; i < splitedData.length; i++) {
     let currentPart = splitedData[i].flat(splitedData[i].length);
     resultArea = viewer.entities.add({
-        polygon: {
-          hierarchy: Cesium.Cartesian3.fromDegreesArrayHeights(currentPart),
-          material: currentColor,
-          outline: true,
-          outlineWidth: 1000000.0, 
-          outlineColor: currentColor,
-        },
-      });
+      polygon: {
+        hierarchy: Cesium.Cartesian3.fromDegreesArrayHeights(currentPart),
+        material: currentColor,
+        outline: true,
+        outlineWidth: 1000000.0,
+        outlineColor: currentColor,
+      },
+    });
   }
   viewer.zoomTo(resultArea);
 }
@@ -104,7 +104,14 @@ function showCesiumMap() {
       let errorMessage = `Unable to read data from file ${fileNames[i]}. Check, if data inside the file is correct`;
       buildCustomErrorMessage("Error!", errorMessage);
     }
-  }
+  };
+  Cesium.exportKml({
+    entities: viewer.entities,
+    kmz: false,
+  })
+    .then(function (result) {
+      downloadBlob("test_rect.kml", new Blob([result.kml], {type: 'text/kml'}));
+    });
 }
 
 /**Gets data from ALL the text files the user uploaded */
@@ -133,6 +140,25 @@ function readTextData(files) {
     }
   });
 }
+
+/**
+ * download kml file
+ * @param {string} filename 
+ * @param {Blob} blob 
+ */
+function downloadBlob(filename, blob) {
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveBlob(blob, filename);
+  } else {
+    const elem = window.document.createElement("a");
+    elem.href = window.URL.createObjectURL(blob);
+    elem.download = filename;
+    document.body.appendChild(elem);
+    elem.click();
+    document.body.removeChild(elem);
+  }
+}
+
 
 /**The main function. What a nightmare! */
 function main() {
