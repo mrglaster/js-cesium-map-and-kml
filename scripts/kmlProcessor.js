@@ -10,7 +10,25 @@ var filesCoordinatesContainer = [];
 var fileNames = [];
 
 const POLYGON_POINTS_LIMIT = 100;
+const POINTS_LIMIT = 1000;
 
+
+function exportKml() {
+  let kml_result = beginning
+  for (let i = 0; i < filesCoordinatesContainer.length; i++) {
+      let coord_block = ''
+      for (let j = 0; j < filesCoordinatesContainer[i].length; j++) {
+          let coords = filesCoordinatesContainer[i][j]
+          coord_block += `<gx:coord> ${coords[0]} ${coords[1]} ${coords[2]}</gx:coord>`
+          if (j % POINTS_LIMIT === 0 || (j + 1) >= filesCoordinatesContainer[i].length) {
+              kml_result += coords_beginning + coord_block + coords_ending
+              coord_block = ''
+          }
+      }
+  }
+  kml_result += end
+  downloadBlob('result.kml', new Blob([kml_result]))
+}
 
 
 function chunkify(a, n, balanced) {
@@ -111,13 +129,7 @@ function showCesiumMap() {
   btn_load.onclick = () => {
     try {
       console.log(1);
-      Cesium.exportKml({
-        entities: viewer.entities,
-        kmz: false
-      })
-      .then(function (result) {
-        downloadBlob("result.kml", new Blob([result.kml]), {type: 'text/kml'});
-      })
+      exportKml(filesCoordinatesContainer);
     } catch (error) {
       console.error(error)
     }
@@ -168,6 +180,7 @@ function downloadBlob(filename, blob) {
     document.body.removeChild(elem);
   }
 }
+
 
 
 /**The main function. What a nightmare! */
