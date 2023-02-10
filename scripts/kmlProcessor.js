@@ -105,13 +105,23 @@ function showCesiumMap() {
       buildCustomErrorMessage("Error!", errorMessage);
     }
   };
-  Cesium.exportKml({
-    entities: viewer.entities,
-    kmz: false,
-  })
-    .then(function (result) {
-      downloadBlob("test_rect.kml", new Blob([result.kml], {type: 'text/kml'}));
-    });
+  let btn_load = document.getElementById('download')
+  btn_load.style.display = 'block';
+  console.log(btn_load);
+  btn_load.onclick = () => {
+    try {
+      console.log(1);
+      Cesium.exportKml({
+        entities: viewer.entities,
+        kmz: false
+      })
+      .then(function (result) {
+        downloadBlob("result.kml", new Blob([result.kml]), {type: 'text/kml'});
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  };
 }
 
 /**Gets data from ALL the text files the user uploaded */
