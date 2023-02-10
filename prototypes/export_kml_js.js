@@ -215,82 +215,85 @@ var fileNames = [];
 function readTextData(files) {
     let readers = [];
     for (let i = 0; i < files.length; i++) {
-      fileNames.push(files[i].name);
-      readers.push(readFileAsText(files[i]));
+        fileNames.push(files[i].name);
+        readers.push(readFileAsText(files[i]));
     }
     return Promise.all(readers).then((values) => {
-      for (let i = 0; i < values.length; i++) {
-        var preparedFileData = [];
-        var currentFile = values[i].split("\n").slice(1);
-        for (let j = 0; j < currentFile.length; j++) {
-          let currentRow = currentFile[j];
-          currentRow = currentRow.replace("\t", " ");
-          preparedFileData.push(
-            currentRow
-              .replace(/[^0-9.-]/g, " ")
-              .trim()
-              .split(/\s+/)
-              .map(Number)
-          );
+        for (let i = 0; i < values.length; i++) {
+            var preparedFileData = [];
+            var currentFile = values[i].split("\n").slice(1);
+            for (let j = 0; j < currentFile.length; j++) {
+                let currentRow = currentFile[j];
+                currentRow = currentRow.replace("\t", " ");
+                preparedFileData.push(
+                    currentRow
+                        .replace(/[^0-9.-]/g, " ")
+                        .trim()
+                        .split(/\s+/)
+                        .map(Number)
+                );
+            }
+            filesCoordinatesContainer.push(preparedFileData);
         }
-        filesCoordinatesContainer.push(preparedFileData);
-      }
     });
 }
 
 /**Gets data from single text file */
 function readFileAsText(file) {
     return new Promise(function (resolve, reject) {
-      let fr = new FileReader();
-      fr.onload = function () {
-        resolve(fr.result);
-      };
-      fr.onerror = function () {
-        reject(fr);
-      };
-      fr.readAsText(file);
+        let fr = new FileReader();
+        fr.onload = function () {
+            resolve(fr.result);
+        };
+        fr.onerror = function () {
+            reject(fr);
+        };
+        fr.readAsText(file);
     });
-  }
+}
 
 /**The main function. */
 function main() {
     (async () => {
-      const { value: fileArray } = await Swal.fire({
-        title: "Attach files with coordinates",
-        input: "file",
-        inputAttributes: {
-          accept: ".csv, .txt, .dat, .data",
-          multiple: "multiple",
-        },
-        text: "Upload here text files containing information about points in format: header and after longitude, latitude, height",
-        imageUrl: LOAD_IMAGE_URL,
-        imageWidth: 200,
-        imageHeight: 200,
-        allowOutsideClick: false,
-        inputValidator: (value) => {
-          if (!value || value.length == 0) return "You must attach data file(s)!";
-        },
-      });
-      if (fileArray) return fileArray;
+        const { value: fileArray } = await Swal.fire({
+            title: "Attach files with coordinates",
+            input: "file",
+            inputAttributes: {
+                accept: ".csv, .txt, .dat, .data",
+                multiple: "multiple",
+            },
+            text: "Upload here text files containing information about points in format: header and after longitude, latitude, height",
+            imageUrl: LOAD_IMAGE_URL,
+            imageWidth: 200,
+            imageHeight: 200,
+            allowOutsideClick: false,
+            inputValidator: (value) => {
+                if (!value || value.length == 0) return "You must attach data file(s)!";
+            },
+        });
+        if (fileArray) return fileArray;
     })().then((result) => {
-      let preparedData = readTextData(result);
-      preparedData.then(() => {
-        exportKml()
-      });
+        let preparedData = readTextData(result);
+        preparedData.then(() => {
+            exportKml()
+        });
     });
 }
 
 const POINTS_LIMIT = 1000
 function exportKml() {
     let kml_result = beginning
-    for (let i = 0; i < filesCoordinatesContainer[0].length; i++) {
-        let coords = filesCoordinatesContainer[0][i]
-        if (i % POINTS_LIMIT === 0) {
-            kml_result += coords_beginning
+    console.log(filesCoordinatesContainer);
+    for (let i = 0; i < filesCoordinatesContainer.length; i++) {
+        for (let j = 0; j < filesCoordinatesContainer[i].length; j++) {
+            let coords = filesCoordinatesContainer[i][j]
+            if (j % POINTS_LIMIT === 0) {
+                kml_result += coords_beginning
+            }
+            kml_result += `<gx:coord> ${coords[0]} ${coords[1]} ${coords[2]}</gx:coord>`
+            if ((j + 1) % POINTS_LIMIT === 0 || (j + 1) >= filesCoordinatesContainer[i].length)
+                kml_result += coords_ending
         }
-        kml_result += `<gx:coord> ${coords[0]} ${coords[1]} ${coords[2]}</gx:coord>`
-        if ((i + 1) % POINTS_LIMIT === 0 || (i + 1) >= filesCoordinatesContainer[0].length)
-        kml_result += coords_ending
     }
     kml_result += end
     downloadBlob('test.kml', new Blob([kml_result]))
@@ -307,16 +310,15 @@ main()
  */
 function downloadBlob(filename, blob) {
     if (window.navigator.msSaveOrOpenBlob) {
-      window.navigator.msSaveBlob(blob, filename);
+        window.navigator.msSaveBlob(blob, filename);
     } else {
-      const elem = window.document.createElement("a");
-      elem.href = window.URL.createObjectURL(blob);
-      elem.download = filename;
-      document.body.appendChild(elem);
-      elem.click();
-      document.body.removeChild(elem);
+        const elem = window.document.createElement("a");
+        elem.href = window.URL.createObjectURL(blob);
+        elem.download = filename;
+        document.body.appendChild(elem);
+        elem.click();
+        document.body.removeChild(elem);
     }
 }
 
 
-  
