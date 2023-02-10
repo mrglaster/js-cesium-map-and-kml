@@ -283,31 +283,27 @@ function main() {
 const POINTS_LIMIT = 1000
 function exportKml() {
     let kml_result = beginning
-    console.log(filesCoordinatesContainer);
     for (let i = 0; i < filesCoordinatesContainer.length; i++) {
+        let coord_block = ''
         for (let j = 0; j < filesCoordinatesContainer[i].length; j++) {
             let coords = filesCoordinatesContainer[i][j]
-            if (j % POINTS_LIMIT === 0) {
-                kml_result += coords_beginning
+            coord_block += `<gx:coord> ${coords[0]} ${coords[1]} ${coords[2]}</gx:coord>`
+            if (j % POINTS_LIMIT === 0 || (j + 1) >= filesCoordinatesContainer[i].length) {
+                kml_result += coords_beginning + coord_block + coords_ending
+                coord_block = ''
             }
-            kml_result += `<gx:coord> ${coords[0]} ${coords[1]} ${coords[2]}</gx:coord>`
-            if ((j + 1) % POINTS_LIMIT === 0 || (j + 1) >= filesCoordinatesContainer[i].length)
-                kml_result += coords_ending
         }
     }
     kml_result += end
     downloadBlob('test.kml', new Blob([kml_result]))
 }
 
-main()
-
-
 
 /**
  * download kml file
  * @param {string} filename 
  * @param {Blob} blob 
- */
+*/
 function downloadBlob(filename, blob) {
     if (window.navigator.msSaveOrOpenBlob) {
         window.navigator.msSaveBlob(blob, filename);
@@ -321,4 +317,4 @@ function downloadBlob(filename, blob) {
     }
 }
 
-
+main()
