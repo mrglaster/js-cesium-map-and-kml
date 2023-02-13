@@ -28,7 +28,7 @@ The utility solves following tasks
 3) ![SweetAlert2 Dark theme](https://github.com/sweetalert2/sweetalert2-themes/tree/main/dark)
 
 
-### Developed by GromedevTeam, 2022
+### Developed by GromedevTeam, 2022 - 2023
 1) [Vadim Nechaev](https://github.com/nech14)
 2) [Vladislav Novikov](https://github.com/vladnov138)
 3) [Egor Pristavka](https://github.com/mrglaster)
