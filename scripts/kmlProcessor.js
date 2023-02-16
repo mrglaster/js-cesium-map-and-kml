@@ -12,6 +12,8 @@ var fileNames = [];
 const POLYGON_POINTS_LIMIT = 100;
 const POINTS_LIMIT = 1000;
 
+const CONVERT_METERS_KILO = true;
+
 
 function exportKml() {
   let kml_result = beginning
@@ -150,13 +152,17 @@ function readTextData(files) {
       for (let j = 0; j < currentFile.length; j++) {
         let currentRow = currentFile[j];
         currentRow = currentRow.replace("\t", " ");
-        preparedFileData.push(
-          currentRow
+        currentRow =  currentRow
             .replace(/[^0-9.-]/g, " ")
             .trim()
             .split(/\s+/)
-            .map(Number)
-        );
+            .map(Number);
+        
+        //Converts Given Meters into Kilometers if necessary 
+        if (CONVERT_METERS_KILO)  currentRow[2] = currentRow[2] * 1000;
+        newCurrentRow = currentRow;
+        currentRow = null;   
+        preparedFileData.push(newCurrentRow);
       }
       filesCoordinatesContainer.push(preparedFileData);
     }
