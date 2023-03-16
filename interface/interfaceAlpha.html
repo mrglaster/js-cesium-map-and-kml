@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+                clifford: '#da373d',
+                black: '#000000',
+          }
+        }
+      }
+    }
+    </script>
+</head>
+<body>
+
+    <form class="flex items-center w-full space-y-5 px-20 py-10 flex-col">
+        <div class="block space-y-5" >
+            <label class="block">
+                <input type="file" class="block w-full text-sm text-slate-500
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-full file:border-0
+                file:text-sm file:font-semibold
+                file:bg-violet-50 file:text-violet-700
+                hover:file:bg-violet-100
+                " />
+            </label>
+
+            <fieldset>
+                <legend class="leading-6 text-black font-semibold">Выберите единицы изменения</legend>
+
+                <input id="dimensionM" class="peer/draft" type="radio" name="dimension" checked />
+                <label for="dimensionM" class="peer-checked/draft">метры</label>
+                <input id="dimensionK" class="peer/draft" type="radio" name="dimension" />
+                <label for="dimensionK" class="peer-checked/draft">километры</label>
+            </fieldset>
+        </div>
+        
+
+    <div class="flex w-auto">
+
+        <details class="flex flex-col open:bg-white open:ring-1 open:ring-black/5 open:ring-white/10 open:shadow-lg p-10 w-auto rounded-lg" open>
+            <summary class="text-sm leading-6 text-slate-900 text-black font-semibold select-none text-center">
+                Модификации
+            </summary>
+            <div class="flex flex-row mt-3 w-auto text-sm space-x-4 leading-6 text-slate-600 text-slate-400">
+                <div>
+                    <fieldset>
+                        <legend class="leading-6 text-black font-semibold">Выберите цвет</legend>
+    
+                        <input id="draftG" class="peer/draft" type="radio" name="color" checked />
+                        <label for="draftG" class="peer-checked/draft text-green-500">зелённый</label>
+                        <input id="draftR" class="peer/draft" type="radio" name="color" />
+                        <label for="draftR" class="peer-checked/draft text-red-500">красный</label>
+                        <input id="draftB" class="peer/draft" type="radio" name="color" />
+                        <label for="draftB" class="peer-checked/draft text-blue-500">синий</label>
+    
+                        <input id="published" class="peer/published" type="radio" name="color" />
+                        <label for="published" class="peer-checked/published:text-red-500">свой</label>
+    
+                        <div class="hidden peer-checked/draft:block">Цвет выбран</div>
+                        <div class="hidden peer-checked/published:block w-48">
+                            <input type="color" class="form-control block  w-48 text-sm text-slate-500 mt-1 border border-solid border-black max-100" />
+                        </div>
+                    </fieldset>
+    
+                    <label class="block text-left" style="max-width: 400px;">
+                        <span class="text-black font-semibold">Выберите тип заполнения</span>
+                        <select class="form-select block w-48 mt-1 ">
+                            <option>крестики</option>
+                            <option>точки</option>
+                        </select>
+                    </label>
+    
+                    <div class="flex">
+                        <label class="block text-left pr-12" style="max-width: 400px;">
+                            <span class="text-black font-semibold">Прозрачность в %</span>
+                            <input type="number" min="0" max="100" step="0.1" value="100" class="form-control block w-20 text-sm text-slate-500 mt-1 border border-solid border-black max-100" />
+                        </label>
+        
+                        <label class="block text-left" style="max-width: 400px;">
+                            <span class="text-black font-semibold">Толщина линий</span>
+                            <input type="number" min="0" max="100" step="1" value="12" class="form-control block w-20 text-sm text-slate-500 mt-1 border border-solid border-black max-100" />
+                        </label>
+                    </div>    
+                </div>
+                            
+                <div>
+                    <details class="flex flex-col py-2.5 -mr-24 open:mr-0 open:space-x-8">
+                        <summary class="flex flex-col text-sm -space-y-2 -mb-44  leading-6 text-slate-900 text-black font-semibold select-none text-center w-8 border-black border-2">
+                            <div>Т</div>
+                            <div>р</div>
+                            <div>а</div>
+                            <div>е</div>
+                            <div>к</div>
+                            <div>т</div>
+                            <div>о</div>
+                            <div>р</div>
+                            <div>и</div>
+                            <div>я</div>
+                        </summary>
+
+                        <div class="pl-6">
+                            <fieldset>
+                                <legend class="leading-6 text-black font-semibold">Угол обзора</legend>
+        
+                                <input id="coorOneLine" class="peer/draft" type="radio" name="coordinateSystem" checked />
+                                <label for="coorOneLine" class="peer-checked/draft pr-2">В одну строчку</label>
+        
+                                <input id="coorThLine" class="peer/published" type="radio" name="coordinateSystem" />
+                                <label for="coorThLine" class="peer-checked/published">в 3</label>
+        
+                                <div class="hidden peer-checked/draft:block">
+                                    <label class="flex space-x-2 text-left" style="max-width: 400px;">
+                                        <input type="text" class="form-control block w-48 text-sm text-slate-500 mt-1 border border-solid border-black max-100" />
+                                    </label>
+                                </div>
+                                <div class="hidden peer-checked/published:block">
+                                    <label class="flex space-x-2 text-left" style="max-width: 400px;">
+                                        <span class="text-black font-semibold">x:</span>
+                                        <input type="number" value="0" class="form-control block w-14 text-sm text-slate-500 mt-1 border border-solid border-black max-100" />
+                                        <span class="text-black font-semibold">y:</span>
+                                        <input type="number" value="0" class="form-control block w-14 text-sm text-slate-500 mt-1 border border-solid border-black max-100" />
+                                        <span class="text-black font-semibold">z:</span>
+                                        <input type="number" value="0" class="form-control block w-14 text-sm text-slate-500 mt-1 border border-solid border-black max-100" />
+                                    </label>
+                                </div>
+                            </fieldset>
+        
+                            <label class="block text-left" style="max-width: 400px;">
+                                <span class="text-black font-semibold">Время</span>
+                                <input type="datetime-local" class="form-control block w-48 text-sm text-slate-500 mt-1 border border-solid border-black max-100" />
+                            </label>
+        
+                            <label class="block text-left" style="max-width: 400px;">
+                                <span class="text-black font-semibold">Градиент</span>
+                                <div class="flex space-x-5">
+                                    <input type="color" class="form-control block w-50 text-sm text-slate-500 mt-1 border border-solid border-black max-100" />
+                                    <input type="color" class="form-control block w-50 text-sm text-slate-500 mt-1 border border-solid border-black max-100" />
+                                </div>
+                                <div class="flex">
+                                    <input type="number" value="0" class="form-control block w-12 text-sm text-slate-500 mt-1 border border-solid border-black max-100 " />
+                                    <input type="number" value="0" class="form-control block w-12 text-sm text-slate-500 mt-1 border border-solid border-black max-100 ml-6" />
+                                </div>
+                            </label>
+        
+                            <label class="block text-left" style="max-width: 400px;">
+                                <span class="text-black font-semibold">Ход траектории</span>
+                                <input type="text" class="form-control block w-48 text-sm text-slate-500 mt-1 border border-solid border-black max-100" />
+                            </label>
+                        </div>
+
+                    </details>
+                </div>                
+            </div>                
+    </details>
+
+    </div>
+
+        <label class="block">
+            <button type="submit" class="block w-full text-slate-500
+            mr-4 py-2 px-4
+            rounded-full active:border-0
+            text-sm font-semibold
+            bg-violet-100 text-violet-700
+            hover:bg-violet-100  ">
+                Сохранить изменения
+            </button>
+        </label>
+    </form>
+    
+</body>
+</html>
